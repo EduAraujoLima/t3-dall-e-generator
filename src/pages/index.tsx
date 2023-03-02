@@ -1,18 +1,16 @@
 /* eslint-disable @typescript-eslint/no-misused-promises */
-import { zodResolver } from "@hookform/resolvers/zod";
-import type { NextPage } from "next";
-import { useState } from "react";
-import { type SubmitHandler, useForm } from "react-hook-form";
-import { Footer } from "y/components/Footer";
-import { Hero } from "y/components/Hero";
-import { ImageGrid } from "y/components/ImageGrid";
-import { Loader } from "y/components/Loader";
-import {
-  generateDallEImageSchema,
-  type GenerateDallEImageSchema,
-} from "y/schemas/openai";
-import { api } from "y/utils/api";
+import { zodResolver } from '@hookform/resolvers/zod';
+import { type ImagesResponseDataInner } from 'openai';
+import { useState } from 'react';
+import { type SubmitHandler, useForm } from 'react-hook-form';
+import { Footer } from 'y/components/Footer';
+import { Hero } from 'y/components/Hero';
+import { ImageGrid } from 'y/components/ImageGrid';
+import { Loader } from 'y/components/Loader';
+import { type GenerateDallEImageSchema, generateDallEImageSchema } from 'y/schemas/openai';
+import { api } from 'y/utils/api';
 
+import type { NextPage } from "next";
 const Home: NextPage = () => {
   const generateImage = api.dalle.generate.useMutation();
   const [generatedImages, setGeneratedImages] = useState<{ url: string }[]>([]);
@@ -38,7 +36,7 @@ const Home: NextPage = () => {
         quantity,
       });
 
-      const images = response.data.map((image) => ({
+      const images = response.data.map((image: ImagesResponseDataInner) => ({
         url: image.url as string,
       }));
 
@@ -51,9 +49,9 @@ const Home: NextPage = () => {
   };
 
   return (
-    <div className="flex flex-col h-screen overflow-y-auto bg-gray-100 px-8 pt-24">
+    <div className="flex h-screen flex-col overflow-y-auto bg-gray-100 px-8 pt-24">
       <Hero />
-      <div className="flex-grow container mx-auto mt-24 ">
+      <div className="container mx-auto mt-24 flex-grow ">
         <form onSubmit={handleSubmit(onFormSubmit)}>
           <div className="mb-6 grid gap-6 md:grid-cols-3">
             <div className="col-span-3">
