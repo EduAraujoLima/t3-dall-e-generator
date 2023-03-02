@@ -1,5 +1,5 @@
 import { createTRPCRouter, publicProcedure } from "../trpc";
-import { openai } from "../openAi";
+import { openai } from "../openaiModule";
 import { generateDallEImageSchema } from "y/schemas/openai";
 
 export const dalleRouter = createTRPCRouter({
