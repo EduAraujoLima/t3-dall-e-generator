@@ -1,6 +1,6 @@
 import { z } from "zod";
 
-export const generateDallEImageSchema = z.object({
+const generateDallEImageSchema = z.object({
   prompt: z.string().min(3, {
     message: "Prompt must be at least 3 characters long",
   }),
@@ -14,4 +14,10 @@ export const generateDallEImageSchema = z.object({
     }),
 });
 
-export type GenerateDallEImageSchema = z.infer<typeof generateDallEImageSchema>;
+type GenerateDallEImageSchema = z.infer<typeof generateDallEImageSchema>;
+
+export {
+  generateDallEImageSchema
+};
+export type { GenerateDallEImageSchema };
+
